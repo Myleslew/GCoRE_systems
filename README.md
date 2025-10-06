@@ -1,0 +1,1 @@
+You can run each system independently.  Just download the files:  (1-2) you can just run a local server for the index.html file.  (3-4)  you may need to generateassets.html first where you can the elements that are needed to populate the environment then run the index.html. 
