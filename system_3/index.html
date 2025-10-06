@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Response Review System</title>
+    <!-- Load Phaser from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a1a;
+        }
+        #game-container {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container"></div>
+    <!-- Load managers first -->
+    <script src="profileManager.js"></script>
+    <script src="codeExamples.js"></script>
+    <script src="codeRubric.js"></script>
+    <!-- Load scenes -->
+    <script src="startScene.js"></script>
+    <script src="profileScene.js"></script>
+    <script src="submissionScene.js"></script>
+    <script src="reviewScene.js"></script>
+    <script src="evaluationScene.js"></script>
+    <script src="classroomScene.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
