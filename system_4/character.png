@@ -1,0 +1,10 @@
+This is a 128x192 pixel spritesheet (4 columns x 4 rows):
+- Row 1 (frames 0-3): Walking down animation
+- Row 2 (frames 4-7): Walking left animation
+- Row 3 (frames 8-11): Walking right animation
+- Row 4 (frames 12-15): Walking up animation
+
+Each frame is 32x48 pixels.
+
+You can create this temporarily using:
+https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/ 

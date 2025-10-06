@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Game Assets</title>
+</head>
+<body>
+    <h2>Game Assets Generator</h2>
+    <canvas id="classroom" width="800" height="600"></canvas>
+    <br>
+    <canvas id="desk" width="64" height="64"></canvas>
+    <br>
+    <canvas id="character" width="128" height="192"></canvas>
+    <br>
+    <canvas id="computerDesk" width="64" height="64"></canvas>
+    
+    <script>
+        // Generate classroom
+        const classroom = document.getElementById('classroom');
+        const ctxRoom = classroom.getContext('2d');
+
+        // Draw floor
+        ctxRoom.fillStyle = '#8B7355'; // Wood-like color
+        ctxRoom.fillRect(0, 0, 800, 600);
+
+        // Draw floor tiles grid
+        ctxRoom.strokeStyle = '#7A6347';
+        ctxRoom.lineWidth = 1;
+        for (let x = 0; x < 800; x += 40) {
+            ctxRoom.beginPath();
+            ctxRoom.moveTo(x, 0);
+            ctxRoom.lineTo(x, 600);
+            ctxRoom.stroke();
+        }
+        for (let y = 0; y < 600; y += 40) {
+            ctxRoom.beginPath();
+            ctxRoom.moveTo(0, y);
+            ctxRoom.lineTo(800, y);
+            ctxRoom.stroke();
+        }
+
+        // Draw walls
+        ctxRoom.fillStyle = '#D4C4A8'; // Light beige
+        ctxRoom.fillRect(0, 0, 800, 200);
+
+        // Draw chalkboard
+        ctxRoom.fillStyle = '#2A5934'; // Dark green
+        ctxRoom.fillRect(150, 30, 500, 120);
+        ctxRoom.strokeStyle = '#4C4C4C';
+        ctxRoom.lineWidth = 10;
+        ctxRoom.strokeRect(145, 25, 510, 130);
+
+        // Add chalk writing and scribbles
+        ctxRoom.strokeStyle = 'rgba(255, 255, 255, 0.8)'; // Chalky white
+        ctxRoom.lineWidth = 2;
+        ctxRoom.font = '28px "Comic Sans MS"';
+        ctxRoom.fillStyle = 'rgba(255, 255, 255, 0.9)';
+
+        // Add main text
+        ctxRoom.fillText("Today's Top Reviewers:", 200, 60);
+
+        // Add some decorative underlines and scribbles
+        ctxRoom.beginPath();
+        ctxRoom.moveTo(200, 70);
+        ctxRoom.lineTo(450, 70);
+        ctxRoom.stroke();
+
+        // Add some "math-like" scribbles
+        ctxRoom.font = '20px "Comic Sans MS"';
+        ctxRoom.fillText("Points = Reviews × Quality", 200, 100);
+
+        // Add some random chalk marks
+        function addChalkMark(x, y) {
+            ctxRoom.beginPath();
+            ctxRoom.moveTo(x, y);
+            for(let i = 0; i < 5; i++) {
+                ctxRoom.lineTo(
+                    x + Math.random() * 20 - 10,
+                    y + Math.random() * 20 - 10
+                );
+            }
+            ctxRoom.stroke();
+        }
+
+        // Add several random chalk marks
+        for(let i = 0; i < 5; i++) {
+            addChalkMark(
+                200 + Math.random() * 400,
+                50 + Math.random() * 80
+            );
+        }
+
+        // Draw windows
+        function drawWindow(x) {
+            // Window frame
+            ctxRoom.fillStyle = '#4C4C4C';
+            ctxRoom.fillRect(x, 30, 80, 120);
+            
+            // Window panes
+            ctxRoom.fillStyle = '#87CEEB'; // Sky blue
+            ctxRoom.fillRect(x + 5, 35, 70, 50);
+            ctxRoom.fillRect(x + 5, 95, 70, 50);
+            
+            // Window frame details
+            ctxRoom.fillStyle = '#4C4C4C';
+            ctxRoom.fillRect(x + 38, 35, 4, 110); // Vertical divider
+            ctxRoom.fillRect(x + 5, 90, 70, 5); // Horizontal divider
+        }
+
+        // Draw two windows
+        drawWindow(20);
+        drawWindow(700);
+
+        // Generate desk
+        const desk = document.getElementById('desk');
+        const ctxDesk = desk.getContext('2d');
+
+        // Draw desk top
+        ctxDesk.fillStyle = '#8B4513'; // Saddle brown
+        ctxDesk.fillRect(4, 4, 56, 36);
+
+        // Add wood grain texture
+        ctxDesk.strokeStyle = '#654321';
+        ctxDesk.lineWidth = 1;
+        for (let i = 0; i < 8; i++) {
+            ctxDesk.beginPath();
+            ctxDesk.moveTo(4, 8 + i * 4);
+            ctxDesk.lineTo(60, 8 + i * 4);
+            ctxDesk.stroke();
+        }
+
+        // Draw desk legs
+        ctxDesk.fillStyle = '#654321'; // Darker brown
+        ctxDesk.fillRect(8, 40, 8, 20);  // Left leg
+        ctxDesk.fillRect(48, 40, 8, 20); // Right leg
+
+        // Add shadow
+        ctxDesk.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        ctxDesk.fillRect(4, 36, 56, 4);
+
+        // Generate simple character
+        const character = document.getElementById('character');
+        const ctxChar = character.getContext('2d');
+
+        // Function to draw a simple character frame
+        function drawCharacterFrame(x, y, direction) {
+            // Body
+            ctxChar.fillStyle = '#4CAF50';
+            ctxChar.fillRect(x + 8, y + 16, 16, 24);
+            
+            // Head
+            ctxChar.fillStyle = '#FFD700';
+            ctxChar.fillRect(x + 8, y + 4, 16, 16);
+            
+            // Eyes
+            ctxChar.fillStyle = '#000';
+            if (direction === 'left') {
+                ctxChar.fillRect(x + 10, y + 8, 4, 4);
+            } else if (direction === 'right') {
+                ctxChar.fillRect(x + 18, y + 8, 4, 4);
+            } else {
+                ctxChar.fillRect(x + 10, y + 8, 4, 4);
+                ctxChar.fillRect(x + 18, y + 8, 4, 4);
+            }
+        }
+
+        // Draw character frames
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                const x = col * 32;
+                const y = row * 48;
+                const direction = row === 1 ? 'left' : row === 2 ? 'right' : 'front';
+                drawCharacterFrame(x, y, direction);
+            }
+        }
+
+        // After the regular desk canvas, add a computer desk canvas
+        const computerDesk = document.getElementById('computerDesk');
+        const ctxCompDesk = computerDesk.getContext('2d');
+
+        // Draw desk top (slightly larger than regular desk)
+        ctxCompDesk.fillStyle = '#8B4513'; // Saddle brown
+        ctxCompDesk.fillRect(4, 4, 56, 36);
+
+        // Add wood grain texture
+        ctxCompDesk.strokeStyle = '#654321';
+        ctxCompDesk.lineWidth = 1;
+        for (let i = 0; i < 8; i++) {
+            ctxCompDesk.beginPath();
+            ctxCompDesk.moveTo(4, 8 + i * 4);
+            ctxCompDesk.lineTo(60, 8 + i * 4);
+            ctxCompDesk.stroke();
+        }
+
+        // Draw desk legs
+        ctxCompDesk.fillStyle = '#654321'; // Darker brown
+        ctxCompDesk.fillRect(8, 40, 8, 20);  // Left leg
+        ctxCompDesk.fillRect(48, 40, 8, 20); // Right leg
+
+        // Draw computer monitor
+        ctxCompDesk.fillStyle = '#333333'; // Dark gray
+        ctxCompDesk.fillRect(14, 8, 36, 24); // Monitor
+        ctxCompDesk.fillStyle = '#87CEEB'; // Light blue screen
+        ctxCompDesk.fillRect(16, 10, 32, 20);
+
+        // Draw keyboard
+        ctxCompDesk.fillStyle = '#4A4A4A'; // Gray
+        ctxCompDesk.fillRect(20, 32, 24, 6);
+    </script>
+    
+    <div style="margin-top: 20px;">
+        <p>Right-click each canvas and select "Save Image As..." to save the assets:</p>
+        <ul>
+            <li>Save the top canvas as "classroom.png"</li>
+            <li>Save the second canvas as "desk.png"</li>
+            <li>Save the third canvas as "computer-desk.png"</li>
+            <li>Save the bottom canvas as "character.png"</li>
+        </ul>
+        <p>Place all saved images in an "assets" folder in your project directory.</p>
+    </div>
+</body>
+</html> 
